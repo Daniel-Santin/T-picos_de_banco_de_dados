@@ -1,0 +1,59 @@
+SQL> 
+SQL> Prompt "Laboratorio 01 - Inner Join / Left Join"
+Laboratorio 01 - Inner Join / Left Join
+SQL> Prompt "Pedro Lucena - 32055633"
+Pedro Lucena - 32055633
+SQL> Prompt "Daniel Ferreira Santin - 32037139"
+Daniel Ferreira Santin - 32037139
+SQL> 
+SQL> set echo on
+SQL> 
+SQL> -- Questão 01
+SQL> -- Retorne o nome de cada aluno que já tenha cursado disciplinas, e para cada aluno, a sua nota média 
+SQL> --(considerando todas as disciplinas cursadas).
+SQL> 
+SQL> SELECT A.NOME_ALUNO, AVG(AD.NOTA)
+  2  FROM ALUNO A INNER JOIN ALUNO_DISC AD
+  3  ON A.MATRICULA = AD.MATRICULA
+  4  GROUP BY A.NOME_ALUNO;
+
+NOME_ALUNO                     AVG(AD.NOTA)
+------------------------------ ------------
+Rodrigo                                   8
+Claudia                                 7,5
+
+SQL> 
+SQL> -- Questão 02
+SQL> -- Retorne o nome de todos os cursos (mesmo daqueles que não tenham disciplinas cadastradas) e a quantidade 
+SQL> --de disciplinas de cada curso.
+SQL> 
+SQL> SELECT C.NOME_CURSO, COUNT(D.COD_DISCIPLINA)
+  2  FROM CURSO C LEFT JOIN DISCIPLINA D
+  3  ON C.COD_CURSO = D.COD_CURSO
+  4  GROUP BY C.NOME_CURSO;
+
+NOME_CURSO                     COUNT(D.COD_DISCIPLINA)
+------------------------------ -----------------------
+Ciencia da Computacao                                5
+Administracao de Empresas                            0
+
+SQL> 
+SQL> -- Questão 03
+SQL> -- Retorne o nome de todos os alunos (mesmo daqueles que ainda não finalizaram nenhuma disciplina) e, para 
+SQL> -- cada aluno, o número de disciplinas cursadas.
+SQL> 
+SQL> SELECT A.NOME_ALUNO, COUNT(AD.MATRICULA)
+  2  FROM ALUNO A LEFT JOIN ALUNO_DISC AD
+  3  ON A.MATRICULA = AD.MATRICULA
+  4  GROUP BY A.NOME_ALUNO;
+
+NOME_ALUNO                     COUNT(AD.MATRICULA)
+------------------------------ -------------------
+Rodrigo                                          3
+Renata                                           0
+Claudia                                          2
+Regiane                                          0
+Andrea                                           0
+
+SQL> 
+SQL> spool off
