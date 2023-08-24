@@ -11,7 +11,7 @@ BEGIN
 
     IF (v_salario >= 800 AND v_salario <= 2000) THEN
         v_salario := v_salario * 1.5;
-    ELSIF (v_salario <= 3000) THEN
+    ELSIF (v_salario <= 2000) THEN
         v_salario := v_salario * 1.4;
     ELSE
         v_salario := v_salario * 1.1;
